@@ -27,7 +27,7 @@ npx mdoc-cli --help
 Or install globally:
 
 ```bash
-npm install -g mdoc-cli
+npm install -g mdoc-cli@latest
 ```
 
 ## Usage

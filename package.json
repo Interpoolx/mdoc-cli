@@ -1,6 +1,6 @@
 {
   "name": "mdoc-cli",
-  "version": "1.0.3",
+  "version": "2.0.6",
   "description": "High-performance Markdown CLI tool built with Go",
   "main": "index.js",
   "scripts": {

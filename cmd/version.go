@@ -1,8 +1,7 @@
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/interpoolx/mdoc-cli/internal/ui"
 	"github.com/spf13/cobra"
 )
 
@@ -14,8 +13,6 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Display version information",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("mdoc-cli version %s\n", Version)
-		fmt.Printf("commit: %s\n", Commit)
-		fmt.Printf("build time: %s\n", BuildTime)
+		ui.PrintVersion(Version, Author)
 	},
 }

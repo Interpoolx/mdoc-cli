@@ -7,9 +7,9 @@ import (
 )
 
 var (
-	Version   = "dev"
-	Commit    = "unknown"
-	BuildTime = "unknown"
+	Version = "v2.0.6"
+	Commit    = "none"
+	BuildTime = "now"
 )
 
 func main() {

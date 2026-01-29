@@ -1,0 +1,70 @@
+<h1>mdoc-cli</h1>
+
+<p>A high-performance Markdown CLI tool built with Go, distributed via NPM.</p>
+
+<h2>Features</h2>
+
+<ul>
+<li><strong>Blazing Fast</strong>: Sub-50ms startup time.</li>
+<li><strong>Multi-platform</strong>: Native binaries for Windows, Linux, and macOS.</li>
+<li><strong>Conversion</strong>: Convert Markdown to HTML, JSON, and more.</li>
+<li><strong>Batch Processing</strong>: Process entire directories concurrently.</li>
+<li><strong>Zero Dependencies</strong>: Single binary execution.</li>
+</ul>
+
+<h3>Release a new version</h3>
+
+<pre><code class="language-bash">npm run publish-version 1.0.1
+</code></pre>
+
+<p>This automates versioning, cross-platform Go builds, and NPM publication.</p>
+
+<h2>Installation</h2>
+
+<pre><code class="language-bash">npx mdoc-cli --help
+</code></pre>
+
+<p>Or install globally:</p>
+
+<pre><code class="language-bash">npm install -g mdoc-cli@latest
+</code></pre>
+
+<h2>Usage</h2>
+
+<h3>Convert Markdown to HTML</h3>
+
+<pre><code class="language-bash"># Using npx (Recommended)
+npx mdoc-cli convert README.md -o output/README.html
+
+# If installed globally
+mdoc-cli convert README.md -o output/README.html
+</code></pre>
+
+<h3>Batch Conversion</h3>
+
+<pre><code class="language-bash">npx mdoc-cli convert --recursive examples/ -o output/
+</code></pre>
+
+<h3>Validate Markdown</h3>
+
+<pre><code class="language-bash">npx mdoc-cli validate README.md
+</code></pre>
+
+<h2>Configuration</h2>
+
+<p><code>mdoc-cli</code> can be configured via flags, environment variables, or a <code>mdoc-cli.yaml</code> file.</p>
+
+<pre><code class="language-yaml">verbose: true
+theme: dark
+</code></pre>
+
+<h2>Platform Support</h2>
+
+<p><code>mdoc-cli</code> handles platform-specific binaries automatically via the NPM wrapper:
+- <strong>Windows</strong>: Executes <code>md-cli-windows-amd64.exe</code>
+- <strong>Linux</strong>: Executes <code>md-cli-linux-amd64</code> (x64)
+- <strong>macOS</strong>: Executes <code>md-cli-darwin-arm64</code> (Apple Silicon)</p>
+
+<h2>License</h2>
+
+<p>MIT © <a href="https://github.com/interpoolx">Interpoolx</a></p>

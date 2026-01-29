@@ -19,8 +19,22 @@ try {
     fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
     console.log('✓ Updated package.json version');
 
+    // 1.5 Update Go source files
+    const mainGoPath = path.join(__dirname, '..', 'main.go');
+    let mainGoContent = fs.readFileSync(mainGoPath, 'utf8');
+    mainGoContent = mainGoContent.replace(/Version\s+=\s+".*"/, `Version = "v${version}"`);
+    fs.writeFileSync(mainGoPath, mainGoContent);
+
+    const rootGoPath = path.join(__dirname, '..', 'cmd', 'root.go');
+    let rootGoContent = fs.readFileSync(rootGoPath, 'utf8');
+    rootGoContent = rootGoContent.replace(/Version\s+=\s+".*"/, `Version = "v${version}"`);
+    fs.writeFileSync(rootGoPath, rootGoContent);
+    console.log('✓ Updated Go source files');
+
     // 2. Compile Go binaries
     console.log('Compiling Go binaries...');
+    try { execSync('go clean -cache'); } catch (e) { } // best effort clean
+
     const platforms = [
         { os: 'windows', arch: 'amd64', output: 'bin/mdoc-cli-windows-amd64.exe' },
         { os: 'linux', arch: 'amd64', output: 'bin/mdoc-cli-linux-amd64' },
@@ -29,7 +43,8 @@ try {
 
     platforms.forEach(p => {
         console.log(`  - Building for ${p.os}/${p.arch}...`);
-        let cmd = `go build -o ${p.output}`;
+        const ldflags = `-ldflags "-s -w -X main.Version=v${version}"`;
+        let cmd = `go build ${ldflags} -o ${p.output}`;
         if (p.os !== process.platform) {
             if (process.platform === 'win32') {
                 cmd = `$env:GOOS='${p.os}'; $env:GOARCH='${p.arch}'; go build -o ${p.output}`;

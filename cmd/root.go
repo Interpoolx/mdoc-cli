@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/interpoolx/mdoc-cli/internal/ui"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -11,9 +12,10 @@ import (
 var (
 	cfgFile   string
 	verbose   bool
-	Version   string
-	Commit    string
-	BuildTime string
+	Version = "v2.0.6"
+	Author    = "Rajesh (rajesh.im)"
+	Commit    = "none"
+	BuildTime = "now"
 )
 
 var rootCmd = &cobra.Command{
@@ -24,6 +26,13 @@ conversion, and validation capabilities.
 
 Built with Go for exceptional performance and cross-platform support.
 Visit https://github.com/interpoolx/mdoc-cli for more information.`,
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		ui.ShowAppHeader(Version, Author)
+	},
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println()
+		cmd.Help()
+	},
 }
 
 func Execute() error {

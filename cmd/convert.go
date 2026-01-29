@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/interpoolx/mdoc-cli/internal/converter"
+	"github.com/interpoolx/mdoc-cli/internal/ui"
 	"github.com/spf13/cobra"
 )
 
@@ -57,5 +58,6 @@ func runConvert(cmd *cobra.Command, args []string) error {
 		Recursive: convertFlags.recursive,
 	})
 
+	ui.PrintConversionInfo(input, convertFlags.output, convertFlags.to)
 	return conv.Convert(input)
 }
